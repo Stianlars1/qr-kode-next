@@ -1,0 +1,49 @@
+.app {
+  width: 100%;
+  max-width: 1080px;
+  min-height: 100vh;
+  background-color: transparent;
+  margin: 0 auto;
+  padding: 0 20px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 72px;
+
+  .app-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+  }
+}
+
+main {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+
+  gap: 1.5rem;
+
+  h1 {
+    color: #121212;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  main {
+    h1 {
+      color: var(--white);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 48px;
+  }
+}

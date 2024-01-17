@@ -1,0 +1,71 @@
+nav {
+  min-width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+nav figure {
+  display: flex;
+  align-items: center;
+}
+nav figure img {
+  width: 50px;
+  height: auto;
+}
+nav button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text);
+  transition: color 0.3s ease;
+  font-weight: bolder;
+}
+nav button svg {
+  font-size: 1.2rem;
+  fill: var(--text);
+  transition: fill 0.3s ease;
+}
+nav button:hover {
+  color: #858585;
+}
+nav button:hover svg {
+  fill: #858585;
+}
+nav button:active {
+  transform: scale(0.95);
+  filter: brightness(0.75);
+}
+nav button:active svg {
+  filter: brightness(0.75);
+}
+
+@media (prefers-color-scheme: dark) {
+  nav button {
+    color: var(--text);
+  }
+  nav button svg {
+    font-size: 1.2rem;
+    fill: var(--text);
+    transition: fill 0.3s ease;
+  }
+  nav button:hover {
+    color: var(--white);
+  }
+  nav button:hover svg {
+    fill: var(--white);
+  }
+  nav button:active {
+    transform: scale(0.95);
+    filter: brightness(0.75);
+  }
+  nav button:active svg {
+    filter: brightness(0.75);
+  }
+}/*# sourceMappingURL=navbar.css.map */

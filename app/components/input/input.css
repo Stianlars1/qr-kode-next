@@ -1,0 +1,118 @@
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 100%;
+}
+.inputs .input_label {
+  margin-bottom: -0.8rem;
+}
+.inputs > input {
+  height: 35px;
+  min-width: 350px;
+  border-radius: 8px;
+  flex: 1 0 auto;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--logo-bottom-right);
+  outline: none;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+  color: var(--black);
+}
+.inputs > input::-moz-placeholder {
+  color: var(--black);
+}
+.inputs > input::placeholder {
+  color: var(--black);
+}
+.inputs > input:focus {
+  border-color: var(--logo-top-left);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(var(--text), 0.25);
+}
+.inputs .logo {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 0.5rem;
+}
+.inputs .logo .icon-container {
+  margin-left: 0.5rem;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.inputs .logo .icon-container svg {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  fill: var(--green-success);
+  border-radius: 50%;
+  padding: -3px;
+  color: var(--white);
+  position: relative;
+}
+.inputs .logo .icon-container .iconBg {
+  position: absolute;
+  background-color: var(--white);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+.inputs .logo label {
+  font-size: 1rem;
+  line-height: 24px;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.inputs .logo label:active {
+  color: var(--logo-top-left);
+}
+.inputs .logo .label-added {
+  text-decoration: none;
+  cursor: default;
+}
+.inputs .logo .add-image-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.inputs .logo .add-image-label svg {
+  font-size: 1.5rem;
+  fill: var(--logo-top-left);
+}
+.inputs .save-as-zip-option {
+  font-size: 14px;
+  width: -moz-min-content;
+  width: min-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: auto;
+  margin-top: -1rem;
+}
+.inputs .save-as-zip-option label {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  cursor: pointer;
+  flex: 0 1 auto;
+}
+.inputs .save-as-zip-option label input[type=checkbox] {
+  margin: 0.5rem;
+  max-width: 20px;
+}
+.inputs .save-as-zip-option:nth-last-child(3) {
+  margin-top: 0rem;
+}/*# sourceMappingURL=input.css.map */
