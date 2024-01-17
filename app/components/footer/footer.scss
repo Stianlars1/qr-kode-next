@@ -1,57 +1,57 @@
 // Footer.scss
 footer {
-    padding: 20px 0;
-    margin: 0 -25px;
-    background-color: transparent; // Light grey background
-    // background-color: #f8f9fa; // Light grey background
-    text-align: center;
-    font-family: Arial, sans-serif;
-    color: #333; // Dark text for better readability
+  padding: 20px 0;
+  margin: 0 -25px;
+  background-color: transparent; // Light grey background
+  // background-color: #f8f9fa; // Light grey background
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333; // Dark text for better readability
 
-    p {
-        margin: 0;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
+  p {
+    margin: 0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; // Adds space between the icons
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px; // Space between icon and text
+      color: inherit; // Ensures links use the current text color
+      text-decoration: none; // Removes underline from links
+
+      &:hover {
+        text-decoration: underline; // Adds an underline on hover for better interactivity
+      }
+
+      svg {
+        font-size: 24px; // Adjust the size of the icons
+      }
     }
-
-    .social-links {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 25px; // Adds space between the icons
-
-        a {
-            display: flex;
-            align-items: center;
-            gap: 8px; // Space between icon and text
-            color: inherit; // Ensures links use the current text color
-            text-decoration: none; // Removes underline from links
-
-            &:hover {
-                text-decoration: underline; // Adds an underline on hover for better interactivity
-            }
-
-            svg {
-                font-size: 24px; // Adjust the size of the icons
-            }
-        }
-    }
+  }
 }
 
 // Responsive adjustments for mobile devices
 @media (max-width: 768px) {
-    footer {
-        .social-links {
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        a {
-            justify-content: center;
-        }
-
-        // You may also want to adjust the padding for mobile
-        padding: 15px 0;
+  footer {
+    .social-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
     }
+
+    a {
+      justify-content: center;
+    }
+
+    // You may also want to adjust the padding for mobile
+    padding: 15px 0;
+  }
 }

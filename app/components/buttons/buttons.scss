@@ -1,39 +1,41 @@
 .button {
-    background: linear-gradient(to right, var(--logo-top-left) 0%, var(--logo-bottom-right) 100%);
-    background-size: 200%;
-    background-position: center right;
-    color: var(--white);
-    border: none;
-    font-weight: 400;
-    font-size: 1.2rem;
-    padding: 13px 25px;
-    border-radius: 10px;
-    text-decoration: none;
+  background: linear-gradient(
+    to right,
+    var(--logo-top-left) 0%,
+    var(--logo-bottom-right) 100%
+  );
+  background-size: 200%;
+  background-position: center right;
+  color: var(--white);
+  border: none;
+  font-weight: 400;
+  font-size: 1.2rem;
+  padding: 13px 25px;
+  border-radius: 10px;
+  text-decoration: none;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    min-width: 150px;
-    position: relative;
+  min-width: 150px;
+  position: relative;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition:
-        background-position 0.3s ease,
-        transform 0.3s ease,
-        filter 0.3s ease;
+  transition: background-position 0.3s ease, transform 0.3s ease,
+    filter 0.3s ease;
 
-    span {
-        margin-right: 0.5rem;
-    }
+  span {
+    margin-right: 0.5rem;
+  }
 
-    &:hover {
-        background-position: center center;
-    }
+  &:hover {
+    background-position: center center;
+  }
 
-    &:active {
-        transform: scale(0.95);
-        filter: brightness(0.9);
-    }
+  &:active {
+    transform: scale(0.95);
+    filter: brightness(0.9);
+  }
 }
