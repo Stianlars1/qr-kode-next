@@ -34,6 +34,14 @@
     }
   }
 
+  .qr-code-type-select {
+    color: var(--black);
+    > div {
+      > div {
+        color: var(--black);
+      }
+    }
+  }
   .logo {
     display: flex;
     align-items: center;

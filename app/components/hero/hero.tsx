@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { QRModal } from "../QRModal/qrModal";
 import { GenerateButton } from "../buttons/buttons";
 import { GeneratedQRCode } from "../generateQRCode/generateQRCode";
-import { CustomInput } from "../input/input";
+import { CustomInput, QRFormData } from "../input/input";
 import "./hero.css";
 import {
   updateAddedLogo,
@@ -32,12 +32,26 @@ export const Hero = () => {
   const [hasBeenDownloaded, setHasBeenDownloaded] = useState(false);
   const [whiteBorder, setWhiteBorder] = useState(true);
   const [include3DModel, setInclude3DModel] = useState(false);
+  const [formData, setFormData] = useState<QRFormData>({
+    qrCodeType: { value: undefined, label: undefined },
+  });
 
   const isDisabled =
-    !valueToConvert ||
-    valueToConvert.length === 0 ||
-    (imageAdded && !valueToConvert) ||
-    (imageAdded && valueToConvert.length === 0);
+    (!valueToConvert && !Object.values(formData)) ||
+    (imageAdded && !valueToConvert && !Object.values(formData));
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
+  const handleQRCodeTypeChange = (newValue: any) => {
+    console.log("newValue", newValue);
+    // Logic to handle QR code type change
+    setFormData({ qrCodeType: newValue });
+  };
 
   const handleGenerateQR = async () => {
     setIsLoading(true);
@@ -104,6 +118,10 @@ export const Hero = () => {
           setWhiteBorder={setWhiteBorder}
           setInclude3DModel={setInclude3DModel}
           include3DModel={include3DModel}
+          formData={formData}
+          handleInputChange={handleInputChange}
+          handleQRCodeTypeChange={handleQRCodeTypeChange}
+          qrCodeType={formData.qrCodeType}
         />
 
         <GenerateButton
@@ -134,6 +152,7 @@ export const Hero = () => {
             logo={imageSrc}
             setHasBeenDownloaded={setHasBeenDownloaded}
             handleClose={() => handleClose()}
+            formData={formData}
           />
         </QRModal>
       </div>

@@ -30,6 +30,12 @@
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(var(--text), 0.25);
 }
+.inputs .qr-code-type-select {
+  color: var(--black);
+}
+.inputs .qr-code-type-select > div > div {
+  color: var(--black);
+}
 .inputs .logo {
   display: flex;
   align-items: center;

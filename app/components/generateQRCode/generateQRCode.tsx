@@ -15,6 +15,8 @@ import { ClipLoader } from "react-spinners";
 import * as THREE from "three";
 
 import { STLExporter, SVGLoader } from "three/examples/jsm/Addons.js";
+import { QRFormData } from "../input/input";
+import { formatQRCodeData } from "./components/utils";
 import "./generateQRCode.css";
 
 export const GeneratedQRCode = ({
@@ -23,6 +25,8 @@ export const GeneratedQRCode = ({
   saveAsZip,
   whiteBorder,
   include3DModel,
+  formData,
+
   handleClose,
   setHasBeenDownloaded,
 }: {
@@ -31,9 +35,14 @@ export const GeneratedQRCode = ({
   saveAsZip: boolean;
   whiteBorder: boolean;
   include3DModel: boolean;
+  formData: QRFormData;
+
   handleClose: () => void;
   setHasBeenDownloaded: Dispatch<SetStateAction<boolean>>;
 }) => {
+  /**  --  default stuff  ---  **/
+  const formattedValueToConvert = formatQRCodeData(formData, valueToConvert);
+
   /*  ###  useRefs  ###  */
   const qrRef = useRef<HTMLDivElement>(null);
   const qrTransparentRef = useRef<HTMLDivElement>(null);
@@ -66,7 +75,7 @@ export const GeneratedQRCode = ({
 
   /*  ###  Initial QR code props  ###  */
   const initialThreeDeQRcodeProps = {
-    value: valueToConvert,
+    value: formattedValueToConvert,
     size: 300,
     level: "M",
     includeMargin: whiteBorder ? true : false,
@@ -74,7 +83,7 @@ export const GeneratedQRCode = ({
   };
 
   const initialQRCodeProps = {
-    value: valueToConvert,
+    value: formattedValueToConvert,
     size: 300,
     level: "M",
     includeMargin: whiteBorder ? true : false,
@@ -82,7 +91,7 @@ export const GeneratedQRCode = ({
   };
 
   const initialTransparentProps = {
-    value: valueToConvert,
+    value: formattedValueToConvert,
     size: 256,
     level: "M",
     includeMargin: whiteBorder ? true : false,
@@ -103,19 +112,19 @@ export const GeneratedQRCode = ({
     const updateQRCodeProps = async () => {
       const propsDefault = await getQRcodeProps(
         logo,
-        valueToConvert,
+        formattedValueToConvert,
         whiteBorder,
         false
       );
       const propsTransparent = await getQRcodeProps(
         logo,
-        valueToConvert,
+        formattedValueToConvert,
         whiteBorder,
         true
       );
       const props3D = await getQRcodeProps(
         undefined,
-        valueToConvert,
+        formattedValueToConvert,
         whiteBorder,
         true
       );
@@ -174,6 +183,7 @@ export const GeneratedQRCode = ({
   }, [
     logo,
     valueToConvert,
+    formattedValueToConvert,
     saveAsZip,
     include3DModel,
     whiteBorder,
