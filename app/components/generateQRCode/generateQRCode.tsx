@@ -23,6 +23,7 @@ export const GeneratedQRCode = ({
   saveAsZip,
   whiteBorder,
   include3DModel,
+  handleClose,
   setHasBeenDownloaded,
 }: {
   valueToConvert: string;
@@ -30,6 +31,7 @@ export const GeneratedQRCode = ({
   saveAsZip: boolean;
   whiteBorder: boolean;
   include3DModel: boolean;
+  handleClose: () => void;
   setHasBeenDownloaded: Dispatch<SetStateAction<boolean>>;
 }) => {
   /*  ###  useRefs  ###  */
@@ -183,7 +185,6 @@ export const GeneratedQRCode = ({
   /*  ###  handle Download Button click  ###  */
   const handleDownload = async () => {
     setIsDownloading(true);
-    setHasBeenDownloaded(true);
     if (saveAsZip) {
       downloadContent && saveAs(downloadContent, "qr-kode.zip");
     } else {
@@ -204,11 +205,12 @@ export const GeneratedQRCode = ({
       "Sjekk om du trenger å tillate nedlastingen i nettleseren din",
       { duration: 6000 }
     );
+    setHasBeenDownloaded(true);
   };
 
   setTimeout(() => {
-    setIsDownloading(false);
-  }, 7000);
+    handleClose && handleClose();
+  }, 10000);
 
   return (
     <>

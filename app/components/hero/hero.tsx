@@ -49,34 +49,31 @@ export const Hero = () => {
     setIsLoading(false);
     setGenerateQR(true);
   };
-  const handleClose = () => {
+
+  const handleClose = async () => {
     setOnSuccess(true);
     setGenerateQR(false);
 
-    const handleSuccess = async () => {
-      setImageSrc(undefined);
-      setValueToConvert("");
-      setGenerateQR(false);
-      setOnSuccess(false);
-      setImageAdded(false);
-      setShowDisabledMessage(false);
-      setSaveAsZip(true);
-      setWhiteBorder(true);
-      setInclude3DModel(false);
-      setHasBeenDownloaded(false);
+    if (hasBeenDownloaded) {
+      toast.remove();
+      toast.success("QR kode lastet ned", { duration: 5000 });
+    }
 
-      await updateDownloadCount();
-      queryClient.invalidateQueries({ queryKey: ["insights"] });
-      setInputResetKey((prevKey) => prevKey + 1); // Increment the reset key
+    setImageSrc(undefined);
+    setValueToConvert("");
+    setGenerateQR(false);
+    setOnSuccess(false);
+    setImageAdded(false);
+    setShowDisabledMessage(false);
+    setSaveAsZip(true);
+    setWhiteBorder(true);
+    setInclude3DModel(false);
+    setHasBeenDownloaded(false);
 
-      if (hasBeenDownloaded) {
-        toast.remove();
-        toast.success("QR kode lastet ned", { duration: 5000 });
-      }
-
-      return;
-    };
-    handleSuccess();
+    await updateDownloadCount();
+    queryClient.invalidateQueries({ queryKey: ["insights"] });
+    setInputResetKey((prevKey) => prevKey + 1); // Increment the reset key
+    return;
   };
 
   const handleMouseEnter = () => {
@@ -113,7 +110,7 @@ export const Hero = () => {
           title={onSuccess ? "restart" : "Lag QR kode"}
           isLoading={isLoading}
           props={{
-            onClick: handleGenerateQR,
+            onClick: onSuccess ? () => window.history.go(0) : handleGenerateQR,
             disabled: isDisabled,
             onMouseOver: handleMouseEnter,
             onMouseOut: handleMouseLeave,
@@ -136,6 +133,7 @@ export const Hero = () => {
             valueToConvert={valueToConvert}
             logo={imageSrc}
             setHasBeenDownloaded={setHasBeenDownloaded}
+            handleClose={() => handleClose()}
           />
         </QRModal>
       </div>
