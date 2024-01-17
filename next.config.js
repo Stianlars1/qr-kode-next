@@ -1,11 +1,15 @@
-/**
- * @type {import('next').NextConfig}
- */
+/** @type {import('next').NextConfig} */
 
-const path = require("path");
+const nextConfig = {
+  output: "standalone",
+};
 
 module.exports = {
-  sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
+  nextConfig,
+
+  experimental: {
+    appDir: true,
   },
 };
+
+module.exports = nextConfig;
