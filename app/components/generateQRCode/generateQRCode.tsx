@@ -1,14 +1,7 @@
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import { QRCodeSVG } from "qrcode.react";
-import {
-  CSSProperties,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
@@ -32,7 +25,7 @@ export const GeneratedQRCode = ({
   whiteBorder: boolean;
   include3DModel: boolean;
   handleClose: () => void;
-  setHasBeenDownloaded: Dispatch<SetStateAction<boolean>>;
+  setHasBeenDownloaded: () => void;
 }) => {
   /*  ###  useRefs  ###  */
   const qrRef = useRef<HTMLDivElement>(null);
@@ -184,30 +177,32 @@ export const GeneratedQRCode = ({
 
   /*  ###  handle Download Button click  ###  */
   const handleDownload = async () => {
-    setIsDownloading(true);
-    if (saveAsZip) {
-      downloadContent && saveAs(downloadContent, "qr-kode.zip");
-    } else {
-      // png
-      png && saveAs(png, "qr-kode.png");
-      transparentPNG && saveAs(transparentPNG, "qr-kode-transparent.png");
+    const download = await new Promise((resolve, reject) => {
+      if (saveAsZip) {
+        downloadContent && saveAs(downloadContent, "qr-kode.zip");
+      } else {
+        // png
+        png && saveAs(png, "qr-kode.png");
+        transparentPNG && saveAs(transparentPNG, "qr-kode-transparent.png");
 
-      // svg
-      svg && saveAs(svg, "qr-kode.svg");
-      transparentSVG && saveAs(transparentSVG, "qr-kode-transparent.svg");
+        // svg
+        svg && saveAs(svg, "qr-kode.svg");
+        transparentSVG && saveAs(transparentSVG, "qr-kode-transparent.svg");
 
-      if (include3DModel && ThreeDModel) {
-        saveAs(ThreeDModel, "qr-kode-3d-model.stl");
+        if (include3DModel && ThreeDModel) {
+          saveAs(ThreeDModel, "qr-kode-3d-model.stl");
+        }
       }
-    }
-    toast.remove();
-    toast.loading(
-      "Sjekk om du trenger å tillate nedlastingen i nettleseren din",
-      { duration: 6000 }
-    );
-    setHasBeenDownloaded(true);
+      setHasBeenDownloaded();
+      toast.remove();
+      toast.loading(
+        "Sjekk om du trenger å tillate nedlastingen i nettleseren din",
+        { duration: 6000 }
+      );
+      resolve(true);
+    });
     setTimeout(() => {
-      handleClose && handleClose();
+      handleClose();
     }, 10000);
   };
 

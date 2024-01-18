@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { QRModal } from "../QRModal/qrModal";
 import { GenerateButton } from "../buttons/buttons";
@@ -32,12 +32,16 @@ export const Hero = () => {
   const [hasBeenDownloaded, setHasBeenDownloaded] = useState(false);
   const [whiteBorder, setWhiteBorder] = useState(true);
   const [include3DModel, setInclude3DModel] = useState(false);
-
   const isDisabled =
     !valueToConvert ||
     valueToConvert.length === 0 ||
     (imageAdded && !valueToConvert) ||
     (imageAdded && valueToConvert.length === 0);
+  const hasBeenDownloadedRef = useRef(hasBeenDownloaded);
+
+  useEffect(() => {
+    hasBeenDownloadedRef.current = hasBeenDownloaded;
+  }, [hasBeenDownloaded]);
 
   const handleGenerateQR = async () => {
     setIsLoading(true);
@@ -49,12 +53,16 @@ export const Hero = () => {
     setIsLoading(false);
     setGenerateQR(true);
   };
-
   const handleClose = async () => {
-    console.log("\nhandleClose");
+    if (hasBeenDownloadedRef.current) {
+      toast.remove();
+      toast.success("QR kode lastet ned", { duration: 5000 });
+      await updateDownloadCount();
+      queryClient.invalidateQueries({ queryKey: ["insights"] });
+    }
+
     setOnSuccess(true);
     setGenerateQR(false);
-
     setImageSrc(undefined);
     setValueToConvert("");
     setGenerateQR(false);
@@ -65,14 +73,8 @@ export const Hero = () => {
     setWhiteBorder(true);
     setInclude3DModel(false);
     setHasBeenDownloaded(false);
-
-    if (hasBeenDownloaded) {
-      toast.remove();
-      toast.success("QR kode lastet ned", { duration: 5000 });
-      await updateDownloadCount();
-      queryClient.invalidateQueries({ queryKey: ["insights"] });
-    }
     setInputResetKey((prevKey) => prevKey + 1); // Increment the reset key
+
     return;
   };
 
@@ -132,7 +134,7 @@ export const Hero = () => {
             saveAsZip={saveAsZip}
             valueToConvert={valueToConvert}
             logo={imageSrc}
-            setHasBeenDownloaded={setHasBeenDownloaded}
+            setHasBeenDownloaded={() => setHasBeenDownloaded(true)}
             handleClose={() => handleClose()}
           />
         </QRModal>
