@@ -51,13 +51,9 @@ export const Hero = () => {
   };
 
   const handleClose = async () => {
+    console.log("\nhandleClose");
     setOnSuccess(true);
     setGenerateQR(false);
-
-    if (hasBeenDownloaded) {
-      toast.remove();
-      toast.success("QR kode lastet ned", { duration: 5000 });
-    }
 
     setImageSrc(undefined);
     setValueToConvert("");
@@ -70,8 +66,12 @@ export const Hero = () => {
     setInclude3DModel(false);
     setHasBeenDownloaded(false);
 
-    await updateDownloadCount();
-    queryClient.invalidateQueries({ queryKey: ["insights"] });
+    if (hasBeenDownloaded) {
+      toast.remove();
+      toast.success("QR kode lastet ned", { duration: 5000 });
+      await updateDownloadCount();
+      queryClient.invalidateQueries({ queryKey: ["insights"] });
+    }
     setInputResetKey((prevKey) => prevKey + 1); // Increment the reset key
     return;
   };

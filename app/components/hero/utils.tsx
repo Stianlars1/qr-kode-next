@@ -2,6 +2,7 @@ import { doc, increment, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 export const updateDownloadCount = async () => {
+  console.log("updateDownloadCount");
   const updateDownloadCountQuery = doc(db, "qr-kode", "insights");
 
   await updateDoc(updateDownloadCountQuery, {

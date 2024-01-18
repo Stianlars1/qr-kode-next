@@ -206,11 +206,10 @@ export const GeneratedQRCode = ({
       { duration: 6000 }
     );
     setHasBeenDownloaded(true);
+    setTimeout(() => {
+      handleClose && handleClose();
+    }, 10000);
   };
-
-  setTimeout(() => {
-    handleClose && handleClose();
-  }, 10000);
 
   return (
     <>
