@@ -178,6 +178,7 @@ export const GeneratedQRCode = ({
   /*  ###  handle Download Button click  ###  */
   const handleDownload = async () => {
     const download = await new Promise((resolve, reject) => {
+      setIsDownloading(true);
       if (saveAsZip) {
         downloadContent && saveAs(downloadContent, "qr-kode.zip");
       } else {
@@ -201,9 +202,11 @@ export const GeneratedQRCode = ({
       );
       resolve(true);
     });
-    setTimeout(() => {
-      handleClose();
-    }, 10000);
+    return Promise.all([download]).then(() => {
+      setTimeout(() => {
+        handleClose();
+      }, 10000);
+    });
   };
 
   return (
