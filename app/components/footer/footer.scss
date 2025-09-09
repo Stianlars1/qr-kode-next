@@ -1,12 +1,10 @@
-// Footer.scss
 footer {
   padding: 20px 0;
   margin: 0 -25px;
-  background-color: transparent; // Light grey background
-  // background-color: #f8f9fa; // Light grey background
+  background-color: transparent;
   text-align: center;
   font-family: Arial, sans-serif;
-  color: #333; // Dark text for better readability
+  color: #333;
 
   p {
     margin: 0;
@@ -18,27 +16,26 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 25px; // Adds space between the icons
+    gap: 25px;
 
     a {
       display: flex;
       align-items: center;
-      gap: 8px; // Space between icon and text
-      color: inherit; // Ensures links use the current text color
-      text-decoration: none; // Removes underline from links
+      gap: 8px;
+      color: inherit;
+      text-decoration: none;
 
       &:hover {
-        text-decoration: underline; // Adds an underline on hover for better interactivity
+        text-decoration: underline;
       }
 
       svg {
-        font-size: 24px; // Adjust the size of the icons
+        font-size: 24px;
       }
     }
   }
 }
 
-// Responsive adjustments for mobile devices
 @media (max-width: 768px) {
   footer {
     .social-links {
@@ -51,7 +48,6 @@ footer {
       justify-content: center;
     }
 
-    // You may also want to adjust the padding for mobile
     padding: 15px 0;
   }
 }
